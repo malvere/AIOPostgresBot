@@ -1,0 +1,8 @@
+test_gen.txt
+iotest.py
+.vscode/settings.json
+__pycache__/db.cpython-39.pyc
+__pycache__/envars.cpython-39.pyc
+__pycache__/functions.cpython-39.pyc
+__pycache__/nameRequest.cpython-39.pyc
+__pycache__/testTable.cpython-39.pyc

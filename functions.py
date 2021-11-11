@@ -1,10 +1,12 @@
 import requests
 from itertools import takewhile as t, repeat as r
 
+from envars import USER_AGENT
+
 
 # Function to request information based on intagram username via API
 def request(username):
-    headers = {'User-Agent': 'Mozilla/5.0'}
+    headers = {'User-Agent': USER_AGENT}
     url = (f'https://www.instagram.com/{username}/channel/?__a=1')
     r = requests.get(url, headers=headers)
     if r.text == '{}':

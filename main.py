@@ -54,5 +54,10 @@ async def parseLoop(self):
     DB.close()
 
 
+@dp.message_handler(commands=['help'])
+async def infoCommand(self):
+    await bot.send_message(chat_id=envars.ADMIN, text=envars.USER_AGENT)
+
+
 if __name__ == '__main__':
     executor.start_polling(dp, skip_updates=True)

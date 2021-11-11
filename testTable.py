@@ -1,9 +1,10 @@
+# SQLAlchemy Table for test purposes
+
 from sqlalchemy import Column, Integer
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.sql.sqltypes import VARCHAR
 
 Base = declarative_base()
-URL = 'postgresql://n1:callmyname@localhost/inst'
 
 
 class TestTable(Base):

@@ -27,19 +27,29 @@ fileName = 'generated.txt'
 @dp.message_handler(commands=['start'])
 async def parseLoop(self):
     with open(fileName, 'r') as f:
-        pbar = tqdm(f, total=rcount(fileName), token=envars.API_TOKEN, chat_id=envars.ADMIN)
+        pbar = tqdm(
+            f,
+            total=rcount(fileName),
+            token=envars.API_TOKEN,
+            chat_id=envars.ADMIN)
+
         for line in pbar:
             line = line[:-1]
             pbar.set_description(line)
+
             if isClaimed(line) is False:
                 DB.add(TestTable, line)
                 print(line)
                 await bot.send_message(chat_id=envars.ADMIN, text=line)
+
             elif isClaimed(line) == 'wait':
                 pbar.set_description(f'Limit reached, waiting 60 s. ({line})')
-                await bot.send_message(chat_id=envars.ADMIN, text=f'{line} was skipped')
+                await bot.send_message(
+                    chat_id=envars.ADMIN,
+                    text=f'{line} was skipped')
                 await asyncio.sleep(60)
             await asyncio.sleep(1)
+
     DB.commit()
     DB.close()
 

@@ -2,11 +2,11 @@ import requests
 from itertools import takewhile as t, repeat as r
 
 
+# Function to request information based on intagram username via API
 def request(username):
     headers = {'User-Agent': 'Mozilla/5.0'}
     url = (f'https://www.instagram.com/{username}/channel/?__a=1')
     r = requests.get(url, headers=headers)
-    # print(r.text + '\n' + str(r.status_code))
     if r.text == '{}':
         # Free
         return False
@@ -19,6 +19,7 @@ def request(username):
         return 'wait'
 
 
+# Function to count number of available usernames in the .txt file
 def rawincount(filename):
     f = open(filename, 'rb')
     bufgen = t(lambda x: x, (f.raw.read(1024*1024) for _ in r(None)))

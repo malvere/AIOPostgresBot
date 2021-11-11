@@ -1,28 +1,17 @@
-from sqlalchemy import create_engine, Column, Integer
+# SQLAlchemy wrapper module
+
+from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.sql.sqltypes import VARCHAR
 
 Base = declarative_base()
 
 
-class AvailName(Base):
-    __tablename__ = 'avail_names'
-    id = Column(Integer, primary_key=True)
-    username = Column(VARCHAR(50))
-
-    def __init__(self, availUsername):
-        self.username = availUsername
-
-    def __repr__(self):
-        return f'username = {self.username} with id = {self.id}.'
-
-
 class DataBase(object):
-    def __init__(self, url) -> None:
+    def __init__(self, url: str) -> None:
         self.Base = Base
         self.engine = create_engine(
-            url,
+            url.replace('postgres://', 'postgresql://'),
             echo=True
         )
         self.session = sessionmaker(bind=self.engine)
